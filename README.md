@@ -1,26 +1,32 @@
 # WordPress Heroku
 
-This project is a template for getting [WordPress](http://wordpress.org/) up and running on [Heroku](http://www.heroku.com/). It comes with [PostgreSQL for WordPress](http://wordpress.org/extend/plugins/postgresql-for-wordpress/) pre-installed in order to use Heroku's existing Postgres backend.
+This project is a template for getting [WordPress](http://wordpress.org/) up and running on [Heroku](http://www.heroku.com/). It comes with [PostgreSQL for WordPress](http://wordpress.org/extend/plugins/postgresql-for-wordpress/) pre-installed in order to use Heroku's existing Postgres backend. Originally made by [mhoofman](https://github.com/mhoofman/wordpress-heroku), I've updated it with instructions on how to use the new Heroku Postgres installation instead of the soon-to-be deprecated Shared database.
 
 Installation
 ============
 
 Clone the repository from Github
 
-    $ git clone git://github.com/mhoofman/wordpress-heroku.git
+    $ git clone git://github.com/hanchang/wordpress-heroku.git
     
 With the [Heroku gem](http://devcenter.heroku.com/articles/heroku-command), create your app
 
     $ cd wordpress-heroku
     $ heroku create --stack cedar
-    > Creating strange-turtle-1234... done, stack is cedar
-    > http://strange-turtle-1234.herokuapp.com/ | git@heroku.com:strange-turtle-1234.git
-    > Git remote heroku added
+		Creating infinite-earth-1517... done, stack is cedar
+		http://infinite-earth-1517.herokuapp.com/ | git@heroku.com:infinite-earth-1517.git
+		Git remote heroku added
 
 Add a database to your app
 
-    $ heroku addons:add shared-database:5mb
-    > -----> Adding shared-database:5mb to strange-turtle-1234... done, v3 (free)
+    $ heroku addons:add heroku-postgresql:dev
+		Adding heroku-postgresql:dev on infinite-earth-1517... done, v2 (free)
+		Attached as HEROKU_POSTGRESQL_COPPER
+		Database has been created and is available
+			! WARNING: dev is in beta
+			!          increased risk of data loss and downtime
+			!          send feedback to dod-feedback@heroku.com
+		Use `heroku addons:docs heroku-postgresql:dev` to view documentation.
 
 Create a new branch for any configuration/setup changes needed
 
@@ -30,11 +36,19 @@ Copy the `wp-config.php`
 
     $ cp wp-config-sample.php wp-config.php
 
+Find out the database information, specifying the database that was generated above (in my example, it is HEROKU_POSTGRESQL_COPPER)
+
+		$ heroku pg:credentials HEROKU_DATABASE_NAME
+		Connection info string:
+		 "dbname=xxxxxxxx host=xxxxxxxx port=5432 user=xxxxxxxx password=xxxxxxxx sslmode=require"
+
+Edit the `wp-config.php` and insert the values provided for DB_NAME, DB_HOST, DB_USER, and DB_PASSWORD
+
 Clear `.gitignore` and commit `wp-config.php`
 
     $ >.gitignore
     $ git add .
-    $ git commit -m "zomg wordpress"
+    $ git commit -m "Yay pg-wordpress on heroku!"
     
 Deploy to Heroku
 
