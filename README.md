@@ -49,6 +49,12 @@ Clear `.gitignore` and commit `wp-config.php`
     $ >.gitignore
     $ git add .
     $ git commit -m "Yay pg-wordpress on heroku!"
+
+If you haven't uploaded your public key to Heroku, do so now
+
+		$ heroku keys:add
+		Found existing public key: /home/user/.ssh/id_rsa.pub
+		Uploading SSH public key /home/user/.ssh/id_rsa.pub... done
     
 Deploy to Heroku
 
