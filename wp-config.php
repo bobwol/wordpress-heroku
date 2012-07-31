@@ -14,9 +14,6 @@
  * @package WordPress
  */
 
-Connection info string:
-   "dbname=de79if32h0d84d host=ec2-23-21-85-197.compute-1.amazonaws.com port=5432 user=uekpbpstbxfddp password=Po8iiscIEDXKlIcvnMGvm7FwKu sslmode=require"
-
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define('DB_NAME', 'de79if32h0d84d');
